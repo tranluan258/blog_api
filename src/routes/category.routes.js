@@ -1,13 +1,16 @@
 const express = require('express');
 const CategoryController = require('../controller/category.controller');
 const router = express.Router();
-const auth = require('../middleware/auth.jwt')
+const auth = require('../middleware/auth.jwt');
+const check= require('../middleware/check.permission');
+
+
 
 router.use(auth);
 
-router.get('/get-all-category', CategoryController.getAllCategory)
-router.post('/add-category',CategoryController.addCategory)
-router.delete('/delete-category/:id', CategoryController.deleteCategory)
-router.put('/assign-category', CategoryController.assignCategory)
+router.get('/get-all-category', check.checkPermission('category','read'), CategoryController.getAllCategory)
+router.post('/add-category',check.checkPermission('category','write'),CategoryController.addCategory)
+router.delete('/delete-category/:id',check.checkPermission('category','write'), CategoryController.deleteCategory)
+router.put('/assign-category',check.checkPermission('category','write'), CategoryController.assignCategory)
 
 module.exports = router

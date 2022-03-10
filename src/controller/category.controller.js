@@ -1,11 +1,18 @@
 const CategoryModel = require('../models/category.model')
 const {StatusCodes} = require('http-status-codes');
-const jsonData = require('../helpers/response')
+const jsonData = require('../helpers/response');
+const redis = require('../helpers/redis');
+const KEY_SAVE_CATEGORY = 'category'
 
 class CategoryController {
     static async getAllCategory(req,res){
         try {
+            let redisCategory = await redis.getValues(KEY_SAVE_CATEGORY);
+            if(redisCategory) {
+                return res.status(StatusCodes.OK).json(jsonData("Success", JSON.parse(redisCategory)));
+            }
             let results = await CategoryModel.getAllCategory();
+            await redis.setValuesExpired(KEY_SAVE_CATEGORY,JSON.stringify(results));
             return res.status(StatusCodes.OK).json(jsonData("Success", results));
         } catch (error) {
             console.log("Error get all: ", error.message)

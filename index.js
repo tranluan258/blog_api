@@ -9,11 +9,13 @@ const app = express();
 const CategoryRouter = require('./src/routes/category.routes');
 const UserRouter = require('./src/routes/user.routes');
 const PostRouter = require('./src/routes/post.routes');
- 
+const redis = require('./src/helpers/redis');
 
 app.use(express.json());
 app.use(logger('dev'));
 
+
+redis.connect();
 
 app.get('/api', (req,res) => {
     res.status(200).json({message: "Welcome to blog api"});
