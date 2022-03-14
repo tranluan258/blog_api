@@ -9,6 +9,7 @@ const app = express();
 const CategoryRouter = require('./src/routes/category.routes');
 const UserRouter = require('./src/routes/user.routes');
 const PostRouter = require('./src/routes/post.routes');
+const UserPermissionRouter = require('./src/routes/user.permission.routes')
 const redis = require('./src/helpers/redis');
 
 app.use(express.json());
@@ -21,6 +22,7 @@ app.get('/api', (req,res) => {
     res.status(200).json({message: "Welcome to blog api"});
 })
 
+app.use('/api', UserPermissionRouter);
 app.use('/api', UserRouter);
 app.use('/api', CategoryRouter);
 app.use('/api', PostRouter);
