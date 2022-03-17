@@ -1,9 +1,9 @@
-const UserModel = require("../models/user.model");
-const jwt = require("jsonwebtoken");
-const { StatusCodes } = require("http-status-codes");
-const jsonData = require("../helpers/response");
-const redis = require("../helpers/redis");
-const _ = require("lodash")
+import jwt  from "jsonwebtoken";
+import UserModel  from "../models/user.model.js";
+import { StatusCodes }  from "http-status-codes";
+import jsonData  from "../helpers/response.js";
+import redis  from "../helpers/redis.js";
+import _  from "lodash"
 
 class UserController {
     static async signUp(req, res) {
@@ -22,17 +22,18 @@ class UserController {
         try {
             const { email, password } = req.body;
             let result = await UserModel.signIn(email, password);
-            let user = result.user;
-            let resultPermission = result.resultPermission;
-            if (user) {
-
+            if (result) {
+                let resultPermission = result.resultPermission;
+                let user = result.user;
                 let permission = {};
+
+
                 _.forEach(resultPermission, (value) => {
                     const resource = value.resource;
                     const action = value.action;
-                    permission[resource] ? permission[resource].push(action) : permission[resource] = [action];
+                    permission[resource] ? (permission[resource]) : (permission[resource])[action];
                 })
-                
+
                 // eslint-disable-next-line no-undef
                 const { JWT_SECRET } = process.env;
                 let timestamps = new Date();
@@ -51,13 +52,13 @@ class UserController {
                     updated_at: timestamps,
                 };
 
-                setTimeout(async() => {
+                // setTimeout(async() => {
                     let userInRedis = await redis.getValues(user.id);
                     if (userInRedis) {
                         await redis.deleteKey(user.id);
                     }
                     await redis.setValues(user.id, JSON.stringify(tableToken));
-                },0)
+                // },0)
                 
                 return res.status(StatusCodes.OK).json(jsonData("Login success", token));
                 
@@ -87,4 +88,4 @@ class UserController {
     }
 }
 
-module.exports = UserController;
+export default UserController;

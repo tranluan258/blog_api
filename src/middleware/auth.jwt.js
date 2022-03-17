@@ -1,10 +1,10 @@
-const jwt = require("jsonwebtoken");
-const { StatusCodes } = require("http-status-codes");
-const jsonData = require("../helpers/response");
-const redis = require("../helpers/redis");
+import jwt  from "jsonwebtoken";
+import { StatusCodes }  from "http-status-codes";
+import jsonData  from "../helpers/response.js";
+import redis  from "../helpers/redis.js";
 const TOKEN_VALUE_INDEX = 1;
 
-module.exports = async (req, res, next) => {
+export default async (req, res, next) => {
   // eslint-disable-next-line no-undef
   const { JWT_SECRET } = process.env;
   let header = req.header("Authorization");

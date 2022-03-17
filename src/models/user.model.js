@@ -1,4 +1,5 @@
-const DB = require('../lib/config.db');
+import DB from "../lib/config.db.js";
+
 class UserModel {
     static async signUp(email,password,registeredAt) {
         // eslint-disable-next-line no-useless-catch
@@ -24,6 +25,7 @@ class UserModel {
                     user,resultPermission
                 };
             }
+            return null;
             
         } catch (error) {
             throw error;
@@ -31,4 +33,4 @@ class UserModel {
     }
 }
 
-module.exports = UserModel;
+export default UserModel

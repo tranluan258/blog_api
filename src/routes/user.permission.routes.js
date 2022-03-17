@@ -1,11 +1,9 @@
-const express = require('express');
-const UserPermissionController = require('../controller/user.permission.controller');
+import express  from 'express';
+import UserPermissionController from '../controller/user.permission.controller.js';
 const router = express.Router();
 
-router.put('/add-permission', UserPermissionController.addPermission)
-router.put('/delete-permission', UserPermissionController.deletePermission)
+router.post('/add-permission', UserPermissionController.addPermission)
+router.delete('/delete-permission', UserPermissionController.deletePermission)
 router.put('/update-permission', UserPermissionController.updatePermission)
 
-
-
-module.exports = router;
+export default router;

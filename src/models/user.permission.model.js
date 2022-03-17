@@ -1,4 +1,5 @@
-const DB = require('../lib/config.db');
+import DB from "../lib/config.db.js";
+
 
 class UserPermissionModel {
     static async addPermission(userId,permissionId) {
@@ -35,4 +36,4 @@ class UserPermissionModel {
     }
 }
 
-module.exports = UserPermissionModel;
+export default UserPermissionModel;

@@ -1,16 +1,17 @@
-require("dotenv").config();
-const express = require("express");
+import dotenv from 'dotenv';
+dotenv.config();
+import express from "express";
 // eslint-disable-next-line no-unused-vars
-const DB = require("./src/lib/config.db");
+import DB from './src/lib/config.db.js';
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3000;
-const logger = require('morgan');
+import logger from 'morgan';
 const app = express();
-const CategoryRouter = require('./src/routes/category.routes');
-const UserRouter = require('./src/routes/user.routes');
-const PostRouter = require('./src/routes/post.routes');
-const UserPermissionRouter = require('./src/routes/user.permission.routes')
-const redis = require('./src/helpers/redis');
+import CategoryRouter from './src/routes/category.routes.js';
+import UserRouter from './src/routes/user.routes.js';
+import PostRouter from './src/routes/post.routes.js';
+import UserPermissionRouter from './src/routes/user.permission.routes.js';
+import redis from './src/helpers/redis.js';
 
 app.use(express.json());
 app.use(logger('dev'));
@@ -30,5 +31,4 @@ app.use('/api', PostRouter);
 
 app.listen(PORT, () => console.log("App running PORT: "+PORT));
 
-
-
+export default app;

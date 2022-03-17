@@ -1,7 +1,8 @@
-const mysql = require('mysql2')
+import mysql from 'mysql2';
+import dotenv from 'dotenv';
+dotenv.config();
 // eslint-disable-next-line no-undef
 const {HOST,DATABASE,USER,PASSWORD} = process.env
-
 class DB {
     constructor(database, password,host,user) {
       this.connectionCreated = null;
@@ -27,5 +28,6 @@ class DB {
       return this.connectionCreated;
     }
 }
+const connection = new DB(DATABASE,PASSWORD,HOST,USER).connection()
 
-module.exports = new DB(DATABASE,PASSWORD,HOST,USER).connection();
+export default connection;

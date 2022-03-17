@@ -1,4 +1,4 @@
-const DB = require("../lib/config.db")
+import DB from "../lib/config.db.js";
 
 class CategoryModel{
     static async getAllCategory() {
@@ -46,4 +46,4 @@ class CategoryModel{
     }
 }
 
-module.exports = CategoryModel;
+export default  CategoryModel;

@@ -1,7 +1,7 @@
-const CategoryModel = require('../models/category.model')
-const {StatusCodes} = require('http-status-codes');
-const jsonData = require('../helpers/response');
-const redis = require('../helpers/redis');
+import CategoryModel  from '../models/category.model.js'
+import {StatusCodes}  from 'http-status-codes';
+import jsonData  from '../helpers/response.js';
+import redis  from '../helpers/redis.js';
 const KEY_SAVE_CATEGORY = 'category'
 
 class CategoryController {
@@ -59,10 +59,10 @@ class CategoryController {
                 return res.status(StatusCodes.NOT_FOUND).json(jsonData('Not found'))
            }
         } catch (error) {
-             console.log("Error assign Category: ", error.message)
+            console.log("Error assign Category: ", error.message)
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(jsonData('Server error'));
         }
     }
 }
 
-module.exports = CategoryController;
+export default CategoryController;

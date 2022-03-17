@@ -1,6 +1,6 @@
-const PostModel = require("../models/post.model");
-const {StatusCodes} = require('http-status-codes');
-const jsonData = require('../helpers/response')
+import PostModel  from "../models/post.model.js";
+import {StatusCodes}  from 'http-status-codes';
+import jsonData  from '../helpers/response.js';
 
 class PostController {
     static async getAllPost(req,res){
@@ -78,4 +78,4 @@ class PostController {
     }
 }
 
-module.exports = PostController;
+export default PostController;

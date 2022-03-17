@@ -1,4 +1,4 @@
-const DB = require('../lib/config.db')
+import DB from "../lib/config.db.js";
 
 class PostModel {
     static async getAllPost() {
@@ -57,4 +57,4 @@ class PostModel {
     }
 }
 
-module.exports = PostModel;
+export default PostModel;

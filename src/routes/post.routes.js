@@ -1,8 +1,8 @@
-const express = require('express');
-const PostController = require('../controller/post.controller');
-const router = express.Router();
-const auth = require('../middleware/auth.jwt')
-const check = require('../middleware/check.permission');
+import express from 'express';
+import PostController  from '../controller/post.controller.js';
+const router =   express.Router();
+import auth  from'../middleware/auth.jwt.js'
+import check  from'../middleware/check.permission.js';
 
 router.use(auth);
 
@@ -12,4 +12,4 @@ router.delete('/delete-post/:id', check.checkPermission('post','delete'), PostCo
 router.put('/assign-post', check.checkPermission('post','put'), PostController.assignPost)
 router.put('/published-post', check.checkPermission('post','put'), PostController.publishedPost)
 
-module.exports = router
+export default router

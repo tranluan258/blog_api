@@ -1,7 +1,7 @@
-const UserPermissionModel = require("../models/user.permission.model")
-const { StatusCodes } = require("http-status-codes");
-const jsonData = require("../helpers/response");
-const redis = require("../helpers/redis");
+import UserPermissionModel from "../models/user.permission.model.js"
+import { StatusCodes } from "http-status-codes";
+import jsonData from "../helpers/response.js";
+import redis from "../helpers/redis.js";
 
 class UserPermissionController {
     static async addPermission(req, res) {
@@ -23,7 +23,6 @@ class UserPermissionController {
             await UserPermissionModel.addPermission(userId,permissionId);
             await redis.deleteKey(userId);
             return res.status(StatusCodes.OK).json(jsonData("Delete permission successfully"));
-
         } catch (error) {
             console.log("Error delete permission: ", error);
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(jsonData("Server error"));
@@ -44,4 +43,4 @@ class UserPermissionController {
     }
 }
 
-module.exports = UserPermissionController;
+export default UserPermissionController;

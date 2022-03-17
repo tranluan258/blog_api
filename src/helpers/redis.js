@@ -1,8 +1,8 @@
-const redis = require("redis");
+import redis  from "redis";
 const redisClient = redis.createClient();
 
 
-module.exports = {
+export default {
     connect: async () => {
         await redisClient.connect();
     },

@@ -1,8 +1,8 @@
-const express = require('express');
-const CategoryController = require('../controller/category.controller');
-const router = express.Router();
-const auth = require('../middleware/auth.jwt');
-const check= require('../middleware/check.permission');
+import express from 'express';
+import CategoryController from '../controller/category.controller.js';
+const router =  express.Router();
+import auth  from '../middleware/auth.jwt.js';
+import check from '../middleware/check.permission.js';
 
 router.use(auth);
 
@@ -11,4 +11,4 @@ router.post('/add-category',check.checkPermission('category','post'),CategoryCon
 router.delete('/delete-category/:id',check.checkPermission('category','delete'), CategoryController.deleteCategory)
 router.put('/assign-category',check.checkPermission('category','put'), CategoryController.assignCategory)
 
-module.exports = router
+export default router
