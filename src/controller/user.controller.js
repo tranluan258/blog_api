@@ -31,7 +31,7 @@ class UserController {
                 _.forEach(resultPermission, (value) => {
                     const resource = value.resource;
                     const action = value.action;
-                    permission[resource] ? (permission[resource]) : (permission[resource])[action];
+                    permission[resource] ? (permission[resource].push(action)) : (permission[resource]) = [action];
                 })
 
                 // eslint-disable-next-line no-undef

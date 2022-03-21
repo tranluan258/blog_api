@@ -1,15 +1,15 @@
 import {describe,test,expect} from '@jest/globals';
 import request from "supertest";
-
 const ROUTES_ADD_PERMISSION = '/api/add-permission';
 const ROUTES_DELETE_PERMISSION = '/api/delete-permission';
 
 export default (app) => {
+    // eslint-disable-next-line no-unused-vars
     describe("Test add permission", () => {
         test('Add permission done', async () => {
-            const response = await (await request(app).post(ROUTES_ADD_PERMISSION)).send({
+            const response = await request(app).post(ROUTES_ADD_PERMISSION).send({
                 userId : 3,
-                permissionId: 3,
+                permissionId: 2,
             });
             expect(response.statusCode).toEqual(201);
         })
@@ -26,9 +26,9 @@ export default (app) => {
     
     describe("Test delete permission", () => {
         test('Delete permission done', async () => {
-            const response = await (await request(app).delete(ROUTES_DELETE_PERMISSION)).send({
+            const response =  await request(app).delete(ROUTES_DELETE_PERMISSION).send({
                 userId : 3,
-                permissionId: 3,
+                permissionId: 2,
             });
             expect(response.statusCode).toEqual(200);
         })

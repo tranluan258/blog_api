@@ -9,7 +9,7 @@ class UserPermissionController {
             let {userId,permissionId } = req.body;
             await UserPermissionModel.addPermission(userId,permissionId);
             await redis.deleteKey(userId);
-            return res.status(StatusCodes.OK).json(jsonData("Add permission successfully"));
+            return res.status(StatusCodes.CREATED).json(jsonData("Add permission successfully"));
 
         } catch (error) {
             console.log("Error add permission: ", error);
@@ -20,7 +20,7 @@ class UserPermissionController {
     static async deletePermission(req, res) {
         try {
             let {userId,permissionId } = req.body;
-            await UserPermissionModel.addPermission(userId,permissionId);
+            await UserPermissionModel.deletePermission(userId,permissionId);
             await redis.deleteKey(userId);
             return res.status(StatusCodes.OK).json(jsonData("Delete permission successfully"));
         } catch (error) {
