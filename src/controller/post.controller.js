@@ -15,8 +15,7 @@ class PostController {
 
     static async addPost(req,res) {
         try {
-            const {title,slug} = req.body;
-            const authorId = req.user.id || req.body.authorId;
+            const {title,slug,authorId} = req.body;
             let createdAt = new Date();
             let result = await PostModel.addPost(authorId,title,slug,createdAt)
             return res.status(StatusCodes.CREATED).json(jsonData("Created", result))
